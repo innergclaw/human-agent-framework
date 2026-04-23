@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Human x Agent Collaboration Framework</title>
+  <meta name="description" content="A one-page visual framework for better human and agent collaboration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020402;
+      --bg-soft: #071107;
+      --panel: rgba(7, 16, 8, 0.84);
+      --panel-2: rgba(4, 10, 5, 0.94);
+      --line: rgba(82, 255, 141, 0.14);
+      --line-strong: rgba(82, 255, 141, 0.32);
+      --text: #eefbf1;
+      --muted: #92a898;
+      --green: #53ff8d;
+      --green-deep: #10d95d;
+      --blue: #8dffb3;
+      --purple: #b1ffcb;
+      --warning: #c7ff73;
+      --danger: #ff6b6b;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(16, 217, 93, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(83, 255, 141, 0.08), transparent 24%),
+        linear-gradient(180deg, #010301 0%, #050805 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+      padding: 32px 18px 56px;
+    }
+
+    .shell {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, rgba(9, 15, 31, 0.95), rgba(5, 8, 22, 0.92));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      padding: 40px;
+      margin-bottom: 24px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(124, 255, 196, 0.06) 50%, transparent 100%),
+        linear-gradient(180deg, rgba(102, 217, 255, 0.04), transparent 45%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 700;
+      background: rgba(124, 255, 196, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: ">";
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--blue);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 28px;
+      align-items: end;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 5.3rem);
+      line-height: 0.96;
+      letter-spacing: -3px;
+      font-weight: 900;
+      max-width: 780px;
+      margin-bottom: 18px;
+    }
+
+    h1 span { color: var(--green); }
+
+    .hero-copy p {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      margin-bottom: 26px;
+    }
+
+    .quote-box {
+      background: rgba(124, 255, 196, 0.06);
+      border: 1px solid rgba(124, 255, 196, 0.18);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .quote-box p {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px 20px;
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(9, 15, 31, 0.88), rgba(7, 11, 24, 0.94));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 36%);
+      pointer-events: none;
+    }
+
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-12 { grid-column: span 12; }
+
+    h2 {
+      font-size: 1.55rem;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    .section-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+      max-width: 56ch;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .mini {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .mini h3 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .mini.human h3 { color: var(--green); }
+    .mini.agent h3 { color: var(--blue); }
+
+    ul.clean {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    ul.clean li {
+      color: var(--text);
+      padding-left: 18px;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    ul.clean li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      transform: translateY(-50%);
+      box-shadow: 0 0 18px rgba(124,255,196,0.5);
+    }
+
+    .formula {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .formula-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(124,255,196,0.18), rgba(102,217,255,0.12));
+      border: 1px solid rgba(124,255,196,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      color: var(--green);
+      font-size: 1rem;
+    }
+
+    .formula-step h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .formula-step p {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .compare {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .bad, .good {
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 120px;
+    }
+
+    .bad {
+      background: rgba(255, 107, 107, 0.08);
+      border: 1px solid rgba(255, 107, 107, 0.18);
+    }
+
+    .good {
+      background: rgba(124, 255, 196, 0.07);
+      border: 1px solid rgba(124, 255, 196, 0.18);
+    }
+
+    .bad strong, .good strong {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bad strong { color: var(--danger); }
+    .good strong { color: var(--green); }
+
+    .compare p {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .modes {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .mode {
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mode h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--green);
+    }
+
+    .mode p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 8px;
+    }
+
+    .prompt-box {
+      margin-top: 16px;
+      border-radius: 20px;
+      background: #050915;
+      border: 1px solid rgba(102, 217, 255, 0.18);
+      padding: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+      line-height: 1.75;
+      color: #d9eeff;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .mistakes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .mistake-box {
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .mistake-box h3 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .mistake-box.human h3 { color: var(--warning); }
+    .mistake-box.agent h3 { color: var(--purple); }
+
+    .relationship {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .relationship .mini { min-height: 100%; }
+
+    .footer-card {
+      text-align: center;
+      padding: 34px 28px;
+    }
+
+    .footer-card h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 12px;
+    }
+
+    .footer-card p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 18px;
+    }
+
+    .final-line {
+      display: inline-block;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 800;
+      color: var(--green);
+      background: rgba(124,255,196,0.05);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .mistakes,
+      .relationship,
+      .split,
+      .compare-row {
+        grid-template-columns: 1fr;
+      }
+
+      .span-4, .span-5, .span-6, .span-7 { grid-column: span 12; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 18px 12px 36px; }
+      .hero, .card { padding: 22px; }
+      h1 { letter-spacing: -2px; }
+      .formula-step { grid-template-columns: 48px 1fr; gap: 12px; }
+      .step-num { width: 48px; height: 48px; border-radius: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">InnerG Intel Framework</div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <img src="innerg-intel-logo.png" alt="InnerG Intel logo" style="width:170px;max-width:42vw;height:auto;margin-bottom:20px;filter:drop-shadow(0 0 24px rgba(83,255,141,0.12));">
+          <h1>Human x Agent <span>Collaboration</span> Framework</h1>
+          <p>The strongest AI systems do not replace humans. They extend human range. Vision, taste, judgment, and priority stay with the human. Structure, speed, iteration, and execution move through the agent.</p>
+          <div class="quote-box">
+            <p>Humans should bring vision and judgment. Agents should bring structure and motion.</p>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="stat-card">
+            <div class="stat-label">Core Principle</div>
+            <div class="stat-value">Become intelligence. Then operationalize it.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Best Use</div>
+            <div class="stat-value">Turn rough direction into organized, high-quality execution.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">InnerG Standard</div>
+            <div class="stat-value">Better thinking, faster execution, cleaner feedback, sharper outcomes.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-5">
+        <div class="section-tag">01 / The Model</div>
+        <h2>Clear roles create cleaner work.</h2>
+        <p class="lead">Human-agent collaboration works best when each side owns the right layer of the system.</p>
+        <div class="split">
+          <div class="mini human">
+            <h3>Human owns</h3>
+            <ul class="clean">
+              <li>Vision</li>
+              <li>Taste</li>
+              <li>Priorities</li>
+              <li>Ethics</li>
+              <li>Final approval</li>
+              <li>Strategic context</li>
+            </ul>
+          </div>
+          <div class="mini agent">
+            <h3>Agent owns</h3>
+            <ul class="clean">
+              <li>Speed</li>
+              <li>Structure</li>
+              <li>Research</li>
+              <li>Iteration</li>
+              <li>Drafting</li>
+              <li>Operational consistency</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-7">
+        <div class="section-tag">02 / The Collaboration Formula</div>
+        <h2>Every strong prompt has five parts.</h2>
+        <p class="lead">When humans give agents better shape up front, the output gets sharper, faster, and easier to approve.</p>
+        <div class="formula">
+          <div class="formula-step">
+            <div class="step-num">01</div>
+            <div>
+              <h3>Goal</h3>
+              <p>What are we actually trying to achieve?</p>
+            </div>
+          </div>
+          <div class="formula-step">
+            <div class="step-num">02</div>
+            <div>
+              <h3>Context</h3>
+              <p>Who is this for, what project is this tied to, and what already exists?</p>
+            </div>
+          </div>
+          <div class="formula-step">
+            <div class="step-num">03</div>
+            <div>
+              <h3>Constraints</h3>
+              <p>Tone, deadline, budget, platform, boundaries, and what not to touch.</p>
+            </div>
+          </div>
+          <div class="formula-step">
+            <div class="step-num">04</div>
+            <div>
+              <h3>Definition of Good</h3>
+              <p>What should success feel like? Premium, warm, trustworthy, conversion-focused, client-safe.</p>
+            </div>
+          </div>
+          <div class="formula-step">
+            <div class="step-num">05</div>
+            <div>
+              <h3>Next Action</h3>
+              <p>What should happen right now? Draft, propose options, execute, summarize, or polish.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <div class="section-tag">03 / Better Human Habits</div>
+        <h2>Strong humans give direction with intent.</h2>
+        <div class="compare">
+          <div class="compare-row">
+            <div class="bad">
+              <strong>Weak</strong>
+              <p>Make this better.</p>
+            </div>
+            <div class="good">
+              <strong>Strong</strong>
+              <p>Make this feel more premium and trustworthy for daycare owners.</p>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div class="bad">
+              <strong>Weak</strong>
+              <p>Nah.</p>
+            </div>
+            <div class="good">
+              <strong>Strong</strong>
+              <p>Too generic, too techy. Make it warmer and more parent-friendly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="split" style="margin-top:18px;">
+          <div class="mini">
+            <h3 style="color:var(--green);">Use checkpoints</h3>
+            <ul class="clean">
+              <li>Ask for options</li>
+              <li>Review first pass</li>
+              <li>Approve final direction</li>
+              <li>Request polish pass</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3 style="color:var(--blue);">Build shared language</h3>
+            <ul class="clean">
+              <li>Premium</li>
+              <li>Client-safe</li>
+              <li>Street-clean</li>
+              <li>Conversion-first</li>
+              <li>Too AI</li>
+              <li>Too corporate</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <div class="section-tag">04 / Better Agent Habits</div>
+        <h2>Strong agents earn trust through behavior.</h2>
+        <div class="modes">
+          <div class="mode">
+            <h3>Clarify the lane</h3>
+            <p>Know whether the job is strategist, designer, researcher, builder, editor, or operator.</p>
+          </div>
+          <div class="mode">
+            <h3>Reflect constraints through action</h3>
+            <p>Do not just repeat the rules. Show them in the output.</p>
+          </div>
+          <div class="mode">
+            <h3>Push back when needed</h3>
+            <p>Catch weak ideas, bad priorities, bad UX, and mismatched tone before they ship.</p>
+          </div>
+          <div class="mode">
+            <h3>Preserve continuity</h3>
+            <p>Humans should not have to reteach the same standards every session.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-7">
+        <div class="section-tag">05 / Best Operating Modes</div>
+        <h2>Use the right collaboration mode for the job.</h2>
+        <div class="modes">
+          <div class="mode">
+            <h3>Mode 1: Human leads, agent executes</h3>
+            <p>Best for clear tasks like site edits, design changes, content revisions, and operational support.</p>
+          </div>
+          <div class="mode">
+            <h3>Mode 2: Human sets goal, agent finds path</h3>
+            <p>Best for research, strategy, problem-solving, debugging, and figuring out the route.</p>
+          </div>
+          <div class="mode">
+            <h3>Mode 3: Agent proposes, human judges</h3>
+            <p>Best for naming, brand direction, offers, content angles, messaging, and UI concepts.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-5">
+        <div class="section-tag">06 / Prompt Pattern</div>
+        <h2>Use this structure every time.</h2>
+        <div class="prompt-box">Task: what needs to happen
+Audience: who this is for
+Goal: what result we want
+Tone: how it should feel
+Constraints: what cannot break
+Output: what you want back
+
+Example:
+Task: Build a prebuilt sales section
+Audience: daycare owners and childcare businesses
+Goal: make them want to claim the site
+Tone: premium, warm, trustworthy, conversion-focused
+Constraints: keep it simple, no generic AI vibe
+Output: ship the section and push live</div>
+      </article>
+
+      <article class="card span-12">
+        <div class="section-tag">07 / Common Failure Points</div>
+        <h2>Most bad collaboration comes from fuzzy thinking, not weak tools.</h2>
+        <div class="mistakes">
+          <div class="mistake-box human">
+            <h3>Human mistakes that slow agent work</h3>
+            <ul class="clean">
+              <li>Being too vague</li>
+              <li>Changing direction without saying priorities changed</li>
+              <li>Hiding the real goal</li>
+              <li>Giving corrections with no explanation</li>
+              <li>Asking for perfection in the first pass</li>
+              <li>Not defining what success looks like</li>
+            </ul>
+          </div>
+          <div class="mistake-box agent">
+            <h3>Agent mistakes that break trust</h3>
+            <ul class="clean">
+              <li>Sounding too robotic</li>
+              <li>Pretending confidence without enough signal</li>
+              <li>Overexplaining</li>
+              <li>Not asking when something is truly ambiguous</li>
+              <li>Making weak assumptions in high-stakes work</li>
+              <li>Failing to remember recurring preferences</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-12">
+        <div class="section-tag">08 / The Relationship</div>
+        <h2>The goal is not useful AI. The goal is a better human operating system.</h2>
+        <div class="relationship">
+          <div class="mini human">
+            <h3>What the human should feel</h3>
+            <ul class="clean">
+              <li>I can think bigger because the agent handles execution.</li>
+              <li>I do not need to repeat myself all the time.</li>
+              <li>The agent understands my taste.</li>
+              <li>The agent catches things before they become problems.</li>
+            </ul>
+          </div>
+          <div class="mini agent">
+            <h3>What the agent should function like</h3>
+            <ul class="clean">
+              <li>Strategist when needed</li>
+              <li>Operator when needed</li>
+              <li>Mirror for ideas</li>
+              <li>Second brain for continuity</li>
+              <li>Execution partner under direction</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-12 footer-card">
+        <div class="section-tag">09 / InnerG Standard</div>
+        <h2>Refined human-agent collaboration.</h2>
+        <p>That means better thinking, faster execution, cleaner feedback, stronger memory, and sharper outcomes.</p>
+        <div class="final-line">Humans lead. Agents accelerate. InnerG Intel makes it operational.</div>
+      </article>
+    </section>
+  </div>
+</body>
+</html>
